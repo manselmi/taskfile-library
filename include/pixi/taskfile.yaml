@@ -1,0 +1,62 @@
+# vim: set ft=yaml :
+#
+# https://taskfile.dev
+
+
+version: '3'
+
+set: ['errexit', 'nounset', 'pipefail']
+
+vars:
+  # Cache Directory Tagging Specification
+  #   https://bford.info/cachedir/
+  CACHEDIR_TAG: 'CACHEDIR.TAG'
+  PRINTF_CACHEDIR_TAG_CONTENT: 'printf %s Signature:\ 8a477f597d28d172789f06886806bc55'
+
+tasks:
+
+  preflight:
+    desc: 'Execute pre-flight checks and commands.'
+    summary: |
+      Execute pre-flight checks and commands.
+
+      Ensure pixi command exists ( https://github.com/prefix-dev/pixi#readme ).
+
+      Add {{ .CACHEDIR_TAG | shellQuote }} to .task and .pixi directories
+      ( https://bford.info/cachedir/ ).
+    internal: true
+    silent: true
+    run: 'once'
+    cmds:
+      - 'mkdir -p -- .task .pixi'
+      - '{{ .PRINTF_CACHEDIR_TAG_CONTENT }} > .task/{{ .CACHEDIR_TAG | shellQuote }}'
+      - '{{ .PRINTF_CACHEDIR_TAG_CONTENT }} > .pixi/{{ .CACHEDIR_TAG | shellQuote }}'
+    preconditions:
+      - sh: 'command -v -- pixi'
+        msg: 'pixi command does not exist.'
+
+  update:
+    desc: 'Update dependencies as recorded in the lock file.'
+    summary: |
+      Update dependencies as recorded in the lock file.
+
+      Additional CLI args may be passed to pixi like so:
+
+        task {{ .TASK | shellQuote }} [-- <PIXI_UPDATE_CLI_ARG>…]
+    deps: ['preflight']
+    cmds:
+      - 'pixi update
+          {{ if .UPDATE_CLI_ARGS }}{{ .UPDATE_CLI_ARGS }}{{ else }}{{ .CLI_ARGS }}{{ end }}'
+
+  install:
+    desc: 'Install all dependencies.'
+    summary: |
+      Install all dependencies.
+
+      Additional CLI args may be passed to pixi like so:
+
+        task {{ .TASK | shellQuote }} [-- <PIXI_INSTALL_CLI_ARG>…]
+    deps: ['preflight']
+    cmds:
+      - 'pixi install
+          {{ if .INSTALL_CLI_ARGS }}{{ .INSTALL_CLI_ARGS }}{{ else }}{{ .CLI_ARGS }}{{ end }}'
