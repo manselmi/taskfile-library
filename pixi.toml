@@ -13,7 +13,8 @@ platforms = [
 
 
 [environments]
-lint = { features = ['lint'] }
+default = { solve-group = 'default' }
+lint = { features = ['lint'], solve-group = 'default' }
 
 
 [feature.lint.dependencies]
