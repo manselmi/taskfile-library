@@ -35,6 +35,19 @@ tasks:
       - sh: 'command -v -- pixi'
         msg: 'pixi command does not exist.'
 
+  exec:
+    desc: 'Run a command in a temporary environment.'
+    summary: |
+      Run a command in a temporary environment.
+
+      Additional CLI args may be passed to pixi like so:
+
+        task {{ .TASK | shellQuote }} [-- <PIXI_EXEC_CLI_ARG>…]
+    deps: ['preflight']
+    cmds:
+      - 'pixi exec
+          {{ if .EXEC_CLI_ARGS }}{{ .EXEC_CLI_ARGS }}{{ else }}{{ .CLI_ARGS }}{{ end }}'
+
   update:
     desc: 'Update dependencies as recorded in the lock file.'
     summary: |
