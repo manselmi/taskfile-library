@@ -17,6 +17,12 @@
 
 * [micromamba](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html)
 
+### [`pixi`](include/pixi/taskfile.yaml)
+
+* macOS or Linux
+
+* [pixi](https://pixi.sh)
+
 ### [`sops`](include/sops/taskfile.yaml)
 
 * macOS or Linux
