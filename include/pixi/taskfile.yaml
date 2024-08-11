@@ -35,6 +35,20 @@ tasks:
       - sh: 'command -v -- pixi'
         msg: 'pixi command does not exist.'
 
+  clean:
+    desc: 'Clean the parts of your system which are touched by Pixi.'
+    summary: |
+      Clean the parts of your system which are touched by Pixi. Defaults to cleaning the
+      environments and task cache. Use the `cache` subcommand to clean the cache.
+
+      Additional CLI args may be passed to pixi like so:
+
+        task {{ .TASK | shellQuote }} [-- <PIXI_CLEAN_CLI_ARG>…]
+    deps: ['preflight']
+    cmds:
+      - 'pixi clean
+          {{ if .CLEAN_CLI_ARGS }}{{ .CLEAN_CLI_ARGS }}{{ else }}{{ .CLI_ARGS }}{{ end }}'
+
   exec:
     desc: 'Run a command in a temporary environment.'
     summary: |
