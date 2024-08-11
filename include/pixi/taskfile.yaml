@@ -20,7 +20,7 @@ tasks:
     summary: |
       Execute pre-flight checks and commands.
 
-      Ensure pixi command exists ( https://github.com/prefix-dev/pixi#readme ).
+      Ensure pixi command exists ( https://pixi.sh ).
 
       Add {{ .CACHEDIR_TAG | shellQuote }} to .task and .pixi directories
       ( https://bford.info/cachedir/ ).
@@ -60,3 +60,16 @@ tasks:
     cmds:
       - 'pixi install
           {{ if .INSTALL_CLI_ARGS }}{{ .INSTALL_CLI_ARGS }}{{ else }}{{ .CLI_ARGS }}{{ end }}'
+
+  run:
+    desc: 'Run task in project.'
+    summary: |
+      Run task in project.
+
+      Additional CLI args may be passed to pixi like so:
+
+        task {{ .TASK | shellQuote }} [-- <PIXI_RUN_CLI_ARG>…]
+    deps: ['preflight']
+    cmds:
+      - 'pixi run
+          {{ if .RUN_CLI_ARGS }}{{ .RUN_CLI_ARGS }}{{ else }}{{ .CLI_ARGS }}{{ end }}'
