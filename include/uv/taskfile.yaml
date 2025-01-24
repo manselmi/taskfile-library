@@ -12,7 +12,7 @@ vars:
   #   https://bford.info/cachedir/
   CACHEDIR_TAG: 'CACHEDIR.TAG'
   PRINTF_CACHEDIR_TAG_CONTENT: 'printf %s Signature:\ 8a477f597d28d172789f06886806bc55'
-  PYTHON_MINOR_VERSION: '{{ .PYTHON_MINOR_VERSION | default "3.12" }}'
+  PYTHON_MINOR_VERSION: '{{ .PYTHON_MINOR_VERSION | default "3.13" }}'
   REQUIREMENTS_IN: '{{ .REQUIREMENTS_IN | default "requirements.in" }}'
   REQUIREMENTS_TXT: '{{ .REQUIREMENTS_TXT | default "requirements.txt" }}'
   VENV: '{{ .VENV | default ".venv" }}'
