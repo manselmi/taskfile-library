@@ -16,7 +16,10 @@ tasks:
     cmds:
       - 'launchctl bootout {{ .DOMAIN_TARGET | shellQuote }}{{ .SERVICE_NAME | shellQuote }}'
     status:
-      - '! launchctl print {{ .DOMAIN_TARGET | shellQuote }}{{ .SERVICE_NAME | shellQuote }} &> /dev/null'
+      - |
+        STATUS=0
+        launchctl print {{ .DOMAIN_TARGET | shellQuote }}{{ .SERVICE_NAME | shellQuote }} &> /dev/null || STATUS="${?}"
+        test "${STATUS}" -ne 0
 
   bootstrap:
     desc: 'Bootstrap launchd service definition into domain.'

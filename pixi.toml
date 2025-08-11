@@ -18,11 +18,11 @@ lint = { features = ['lint'], solve-group = 'default' }
 
 
 [feature.lint.dependencies]
-python = { version = '>=3.13.3,<3.14' }
+python = { version = '>=3.13.5,<3.14' }
 
 [feature.lint.pypi-dependencies]
-pre-commit = { version = '>=4.2.0' }
-pre-commit-hooks = { version = '>=5.0.0' }
+pre-commit = { version = '>=4.3.0' }
+pre-commit-hooks = { version = '>=6.0.0' }
 
 [feature.lint.tasks]
 lint = { depends-on = ['pre-commit-run'] }
