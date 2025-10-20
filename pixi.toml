@@ -1,7 +1,7 @@
 # vim: set ft=toml :
 
 
-[project]
+[workspace]
 name = 'taskfile-library'
 channels = ['conda-forge']
 platforms = [
