@@ -18,7 +18,7 @@ run = [
 ]
 
 [tasks.install]
-run = ['mise install', { task = 'lock' }, { task = 'hooks-install' }]
+run = ['mise install', { task = 'hooks-install' }]
 
 [tasks.lint]
 alias = 'default'
