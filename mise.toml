@@ -4,7 +4,12 @@
 min_version = '2026.4.8'
 
 
+[hooks]
+postinstall = [{ task = 'hooks-install' }]
+
+
 [settings]
+experimental = true
 lockfile = true
 lockfile_platforms = ['linux-arm64', 'linux-x64', 'macos-arm64']
 
@@ -30,5 +35,5 @@ run = ['mise upgrade --local', 'mise lock']
 
 
 [tools]
-hk = { version = 'latest', postinstall = 'mise run --skip-tools hooks-install' }
-pkl = { version = 'latest' }
+hk = 'latest'
+pkl = 'latest'
