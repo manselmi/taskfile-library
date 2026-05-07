@@ -28,7 +28,8 @@ alias = 'default'
 run = 'hk fix --all'
 
 [tasks.upgrade]
-run = ['mise upgrade --local']
+env.MISE_LOCKED = '0'
+run = ['mise upgrade --local', 'mise lock']
 
 
 [tools]
