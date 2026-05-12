@@ -1,7 +1,7 @@
 # vim: set ft=toml :
 
 
-min_version = '2026.4.8'
+min_version = '2026.5.6'
 
 
 [hooks]
@@ -13,6 +13,8 @@ experimental = true
 locked = true
 lockfile = true
 lockfile_platforms = ['linux-arm64', 'linux-x64', 'macos-arm64']
+unix_default_file_shell_args = 'sh -euo pipefail'
+unix_default_inline_shell_args = 'sh -euo pipefail -c'
 
 
 [tasks.hooks-install]
